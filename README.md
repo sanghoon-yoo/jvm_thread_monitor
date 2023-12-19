@@ -19,8 +19,8 @@
 3. `ps -ef | grep start_monitor.py`로 정상적으로 실행되었는지 확인합니다.
 
 **종료**
-- 설치 경로에서 `./stop_monitor.py`를 실행합니다.
-- `ps -ef | grep start_monitor.py`로 정상적으로 종료되었는지 확인합니다.
+1. 설치 경로에서 `./stop_monitor.py`를 실행합니다.
+2. `ps -ef | grep start_monitor.py`로 정상적으로 종료되었는지 확인합니다.
 
 **Monitoring.properties 설정**
 - [LOG] PATH: 이벤트가 발생했을 때 생성되는 로그 경로
@@ -34,3 +34,4 @@
   - 예시:
     - `getStateCount(STATE.BLOCKED.value)`: BLOCKED THREAD dump를 시도하며 로그를 저장
     - `getStateCount(STATE.RUNNABLE.value, lambda x, y: None)`: RUNNABLE THREAD dump를 시도하며 로그를 저장하지 않음
+    - `getCpuStatus()`: 서버의 CPU점유율 출력
