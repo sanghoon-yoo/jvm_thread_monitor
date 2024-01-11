@@ -34,10 +34,33 @@ class SYSTEM(Enum):
     def getInterval(self):
         return self.config.get('LOG','INTERVAL')
 
+    def getTimeLine(self):
+        return '[' + str(datetime.now()) + ']'
+
+    def getAccess(self):
+        return self.config.get('LOG','ACCESS')
+
     NEWLINE = '\n'
-    JAVA = getenv('JAVA_HOME') + '/bin/jstack '
-    TIMELINE = '[' + str(datetime.now()) + ']'
+    JAVA = '/usr/local/zulu/bin/jstack '
     CPU = "top -bn1 | grep 'Cpu(s)' | awk '{printf(\"CPU 사용률 : %.1f%%\\n\", 100 - $8)}'"
     LOG = ''
     INTERVAL = ''
-    
+
+class MAIL(Enum):
+    def __init__(self, code):
+        self.config = configparser.ConfigParser()
+        self.config.read('monitoring.properties')
+
+    def __repr__(self):
+        return str(self.value)
+
+    def getReceiver(self):
+        return self.config.get('MAIL','RECEIVER')
+
+    def getSender(self):
+        return self.config.get('MAIL','SENDER')
+
+    def getPassword(self):
+        return self.config.get('MAIL','PASSWORD')
+
+    PROP = ''

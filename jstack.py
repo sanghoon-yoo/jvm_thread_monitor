@@ -27,7 +27,7 @@ class Dump:
     
     def __saveLog(self, data):
         f = io.open(SYSTEM.LOG.getPath(), 'a')
-        f.write(SYSTEM.TIMELINE.value + data + SYSTEM.NEWLINE.value*2)
+        f.write(SYSTEM.LOG.getTimeLine() + data + SYSTEM.NEWLINE.value*2)
         f.close()
 
     def getStateCount(self, status, execute=__saveLog):
@@ -42,11 +42,21 @@ class Dump:
         stdout_pipe = popen(SYSTEM.CPU.value)
         return stdout_pipe.read()
 
+    def getDiskStatus(self):
+        stdout_pipe = popen('df')
+        return stdout_pipe.read()
+
+    def getRamStatus(self):
+        stdout_pipe = popen('free -h')
+        return stdout_pipe.read()
+
+    def getAccessCnt(self):
+        with io.open(SYSTEM.LOG.getAccess(), 'rb') as log:
+            lines = log.readlines()
+            return len(lines)
+
 
 if __name__ == "__main__":
     print('noop')
 
-#Dump(811064).getStateCount(STATE.WAITING.value)
-#Dump(811064).getCpuStatus()
-#Dump(811064).getStateCount(STATE.WAITING.value, lambda x,y: None)
 
