@@ -35,3 +35,9 @@
     - `getStateCount(STATE.BLOCKED.value)`: BLOCKED THREAD dump를 시도하며 로그를 저장
     - `getStateCount(STATE.RUNNABLE.value, lambda x, y: None)`: RUNNABLE THREAD dump를 시도하며 로그를 저장하지 않음
     - `getCpuStatus()`: 서버의 CPU점유율 출력
+
+**메모리 모니터링**
+- 대용량 트래픽환경에서 ThreadDump가 서브프로세스로 인터벌 실행되며 로그를 수집하는 동안 가비지콜렉터를 모니터링하면 더 좋습니다.
+- `jstat -gcutil -t {JVM 프로세스 ID} 5000 20` gc timestamp를 5초 간격으로 20회 수집합니다.
+- minor gc와 major gc의 빈도를 체크하고 STW점유를 줄일 수 있는 최적의 gc알고리즘과 코드 최적화를 진행해보세요.
+- heap dump에 대해서는 추가 포스팅과 프로그램을 개발하여 곧 공개하도록 하겠습니다.
